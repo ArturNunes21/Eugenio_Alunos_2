@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "aluno.h"
 #include <vector>
+#include <fstream>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -19,10 +20,10 @@ Artur::aluno pAluno;
 
 void MainWindow::on_btn_obter_dados_clicked()
 {
-    ifstream arqRead;
-    string linha;
+    std::ifstream arqRead;
+    std::string linha;
     QString disciplina="";
-    vector<aluno*> vetorPonteiros;
+    std::list<aluno*> vetorPonteiros;
     arqRead.open("C:/Users/artur/QT Creator Projects/Eugenio_Alunos/ArquivoAlunosDisciplinas2023.csv");
     if (arqRead.is_open()){
         while (std::getline(arqRead, linha)){

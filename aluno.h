@@ -10,9 +10,10 @@ class aluno
 public:
     QString nome;
     QString matricula;
-    list<QString> turma;  //possui cccodigo da disciplina e a turma
-    list<QString> disciplina; //apenas codigo da disciplina
+    QString curso;
+    std::list<disciplinas*> disciplinaTurma;  //possui codigo da disciplina e a turma
 
+private:
     QString getNome() const;
     void setNome(const QString &newNome);
     QString getMatricula() const;

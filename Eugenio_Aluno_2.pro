@@ -10,11 +10,13 @@ CONFIG += c++17
 
 SOURCES += \
     aluno.cpp \
+    disciplinas.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     aluno.h \
+    disciplinas.h \
     mainwindow.h
 
 FORMS += \

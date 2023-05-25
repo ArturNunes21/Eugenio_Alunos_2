@@ -13,24 +13,16 @@ void aluno::setMatricula(const QString &newMatricula)
     matricula = newMatricula;
 }
 
-QStringList aluno::getTurma() const
+std::list<disciplinas *> aluno::getDisciplinaTurma() const
 {
-    return turma;
+    //Decidir se a função retorna o ponteiro para um objeto,
+    //o ponteiro para todos os objetos, ou uma QString contendo disciplina e turma
+    //de um objeto, ou de todos
 }
 
-void aluno::setTurma(const QString &newTurma)
+void aluno::setDisciplinaTurma(const std::list<disciplinas *> &newDisciplinaTurma)
 {
-    this->turma.push_back(newTurma);
-}
-
-QStringList aluno::getDisciplina() const
-{
-    return disciplina;
-}
-
-void aluno::setDisciplina(const QStringList &newDisciplina)
-{
-    this->disciplina.push_back(newDisciplina);
+    this->disciplinaTurma.push_back(newDisciplinaTurma);
 }
 
 QString aluno::getNome() const

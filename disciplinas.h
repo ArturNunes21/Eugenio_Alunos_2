@@ -3,12 +3,16 @@
 #include <QString>
 #include <list>
 
+namespace Artur{
 
 class disciplinas
 {
-public:
+private:
     QString codigoDisciplina;
     QString turma;
+public:
+    void setTurmaDisciplina(QString);
 };
 
+}   //namespace
 #endif // DISCIPLINAS_H

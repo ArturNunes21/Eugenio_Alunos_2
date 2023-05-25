@@ -12,16 +12,13 @@ public:
     QString matricula;
     QString curso;
     std::list<disciplinas*> disciplinaTurma;  //possui codigo da disciplina e a turma
-
 private:
     QString getNome() const;
     void setNome(const QString &newNome);
     QString getMatricula() const;
     void setMatricula(const QString &newMatricula);
-    QStringList getTurma() const;
-    void setTurma(const QString newTurma);
-    QStringList getDisciplina() const;
-    void setDisciplina(const QStringList &newDisciplina);
+    std::list<disciplinas *> getDisciplinaTurma() const;
+    void setDisciplinaTurma(const std::list<disciplinas *> &newDisciplinaTurma);
 };
 
 }   //namespace

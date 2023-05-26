@@ -1,24 +1,28 @@
 #ifndef ALUNO_H
 #define ALUNO_H
+
+#include "disciplinas.h"
 #include <QString>
 #include <list>
 
 namespace Artur{
 
-class aluno
+class Aluno
 {
-public:
+private:
     QString nome;
     QString matricula;
     QString curso;
-    std::list<disciplinas*> disciplinaTurma;  //possui codigo da disciplina e a turma
-private:
+    std::list<Disciplinas*> disciplinaTurma;  //possui codigo da disciplina e a turma
+public:
     QString getNome() const;
     void setNome(const QString &newNome);
     QString getMatricula() const;
     void setMatricula(const QString &newMatricula);
-    std::list<disciplinas *> getDisciplinaTurma() const;
-    void setDisciplinaTurma(const std::list<disciplinas *> &newDisciplinaTurma);
+    std::list<Disciplinas *> getDisciplinaTurma() const;
+    void setDisciplinaTurma(Disciplinas* newDisciplinaTurma);
+    QString getCurso() const;
+    void setCurso(const QString &newCurso);
 };
 
 }   //namespace

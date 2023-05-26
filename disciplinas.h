@@ -5,7 +5,7 @@
 
 namespace Artur{
 
-class disciplinas
+class Disciplinas
 {
 private:
     QString codigoDisciplina;

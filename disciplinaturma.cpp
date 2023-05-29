@@ -14,10 +14,11 @@ QString DisciplinaTurma::getTurma() const
 void DisciplinaTurma::setDisciplinaTurma(QString &disciplinaTurma)
 {
     QString disciplina = "";
-    for(int i=0; i<6; i++)
+    for(int i=0; i<=6; i++)
     {
         disciplina += disciplinaTurma[i];
     }
+    qDebug() << "Codigo : " << disciplina;
     this->disciplina = disciplina;
     this->turma = disciplinaTurma;
 }

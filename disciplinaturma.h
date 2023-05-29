@@ -2,6 +2,8 @@
 #define DISCIPLINATURMA_H
 #include <QString>
 
+#include <QDebug>
+
 
 class DisciplinaTurma
 {

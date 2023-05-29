@@ -102,13 +102,13 @@ int Aluno::getDisciplinaCursoTamanho(){
 //}
 
 void Aluno::setDisciplinaTurma(QString disciplinas) {
-    qDebug() << disciplinas;
+    //qDebug() << disciplinas;
     QStringList listaDisciplinas = disciplinas.split("  ");
 
     for (auto disciplina=listaDisciplinas.begin(); disciplina!=listaDisciplinas.end(); disciplina++) {
         try {
             DisciplinaTurma* objetoDisciplina = new DisciplinaTurma();
-            qDebug() << "Lista disciplinas : " << *disciplina;
+            //qDebug() << "Lista disciplinas : " << *disciplina;
             objetoDisciplina->setDisciplinaTurma(*disciplina);
             disciplinaTurma.push_back(objetoDisciplina);
         } catch (const QString& exception) {

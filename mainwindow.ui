@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
+    <width>775</width>
     <height>600</height>
    </rect>
   </property>
@@ -14,47 +14,142 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="btn_obter_dados">
+   <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>20</y>
-      <width>101</width>
-      <height>27</height>
+      <x>270</x>
+      <y>80</y>
+      <width>191</width>
+      <height>61</height>
      </rect>
     </property>
     <property name="text">
-     <string>Obter Dados</string>
+     <string>PushButton</string>
     </property>
    </widget>
    <widget class="QComboBox" name="comboBox">
     <property name="geometry">
      <rect>
-      <x>130</x>
-      <y>10</y>
-      <width>81</width>
-      <height>51</height>
+      <x>480</x>
+      <y>80</y>
+      <width>171</width>
+      <height>61</height>
      </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string>Ordenar por curso</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Ordenar por disciplina</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Ordenar por turma</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Mostrar turmas de um aluno</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_3">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>170</y>
+      <width>151</width>
+      <height>41</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="textEdit">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>310</y>
+      <width>331</width>
+      <height>171</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_disciplina">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>151</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Ordenar por Disciplina</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="lineEdit">
     <property name="geometry">
      <rect>
-      <x>120</x>
-      <y>80</y>
+      <x>170</x>
+      <y>10</y>
       <width>113</width>
-      <height>22</height>
+      <height>27</height>
      </rect>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_2">
+   <widget class="QPushButton" name="btn_turma">
     <property name="geometry">
      <rect>
-      <x>270</x>
-      <y>80</y>
-      <width>113</width>
-      <height>22</height>
+      <x>30</x>
+      <y>50</y>
+      <width>151</width>
+      <height>27</height>
      </rect>
+    </property>
+    <property name="text">
+     <string>Ordenar por Turma</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_curso">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>120</y>
+      <width>151</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Ordenar por Curso</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_mostrar_turmas">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>160</y>
+      <width>181</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Mostrar todas as turmas que um aluno está matriculado na faculdade Pontifícia Universidade Dinossauro Legal</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_abrir_janela">
+    <property name="geometry">
+     <rect>
+      <x>510</x>
+      <y>150</y>
+      <width>80</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Selecionar</string>
     </property>
    </widget>
   </widget>
@@ -63,8 +158,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
-     <height>20</height>
+     <width>775</width>
+     <height>24</height>
     </rect>
    </property>
   </widget>

@@ -1,10 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "aluno.h"
-#include "disciplinas.h"
-#include <vector>
-#include <fstream>
-#include <QFileDialog>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -18,36 +13,136 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-Artur::Aluno pAluno;
-Artur::Disciplinas pDisciplinas;
-
-void MainWindow::on_btn_obter_dados_clicked()
+void MainWindow::on_pushButton_clicked()
 {
-    QString enderecoArquivo=QFileDialog::getOpenFileName(this,"Selecione o arquivo",QDir::homePath(),"Todos os arquivos(*.*)");  //Arquivo apenas para leitura
-    std::string linha;      //Variável string para armazenar cada linha do arquivo
-    QString disciplinaQs;
-    std::ifstream arquivoRead;  //Arquivo apenas para leitura
-    std::list<Artur::Aluno*> vetorPonteiros;   //Lista de ponteiros para cada objeto aluno criado
+    QString enderecoArquivo = QFileDialog::getOpenFileName(this,"Selecione o arquivo", QDir::homePath(), "Todos os arquivos(*.*)");
+    std::fstream arquivoRead;
+    std::string linha;
+    //QString disciplinaQs;
     arquivoRead.open(enderecoArquivo.toStdString().c_str());
-    if (arquivoRead.is_open()){
-        while (std::getline(arquivoRead, linha)){   //Armazena cada linha do arquivo em uma variável do tipo string
-            Artur::Aluno* pAluno=new Artur::Aluno();   //A variável 'pAluno', do tipo ponteiro de objeto para a classe aluno é criada
-            QString linhaQt=QString::fromStdString(linha);  //Passa a linha de string para QString, afim de realizar mais operações
-            QStringList lista=linhaQt.split(';');   //Cria uma lista contendo as 3 colunas do arquivo
-
-            //Atribuição de nome e matricula
-            pAluno->setMatricula(lista[0]);  //Primeira coluna
-            pAluno->setNome(lista[1]);       //Segunda coluna
-
-            //Atribui disciplinas com a turma para o objeto
-            QStringList listaTurmas=lista[3].split(' ');    //Separa cada disciplina em uma lista de QString
-            for(auto it=listaTurmas.begin(); it!=listaTurmas.end(); it++){
-                Artur::Disciplinas* pDisciplinas=new Artur::Disciplinas;  //A variável 'pDisciplinas', do tipo ponteiro de objeto para a classe Disciplinas é criada
-                disciplinaQs=*it; //Atribui o valor apontado pelo iterator a uma QString
-                pDisciplinas->setTurmaDisciplina(disciplinaQs);    //Atribui disciplina e turma para o objeto
-                pAluno->setDisciplinaTurma(pDisciplinas);  //Ponteiro para nova disciplina/turma é atribuido a lista de disciplinas do objeto Aluno
+    if(arquivoRead.is_open()){
+        Aluno* objetoAluno;
+        while(std::getline(arquivoRead,linha))
+{
+            QString linhaQt=QString::fromStdString(linha);
+            try{
+                objetoAluno = new Aluno(linhaQt);
             }
+            catch(QString &erro){
+                QMessageBox::critical(this,"ERRO", erro);
+            }
+
+
+//            QStringList lista=linhaQt.split(';');
+
+//            if(lista.size()!=3)
+//                throw QString ("Formato inválido.");
+//            objetoAluno->setMatricula(lista[0]);
+//            objetoAluno->setCurso(lista[0]);
+//            objetoAluno->setNome(lista[1]);
+//            QDebug>>lista[1]>>"\n";
+
+//            QStringList listaTurmas=lista[3].split(' ');
+
+//            for(auto it=listaTurmas.begin(); it!=listaTurmas.end(); it++)
+//            {
+//                DisciplinaTurma* objetoDisciplina = new DisciplinaTurma;
+//                disciplinaQs=*it;
+//                objetoDisciplina->setDisciplinaTurma(disciplinaQs);
+//                objetoAluno->setDisciplinaTurma(objetoDisciplina);
+//            }
+            listaAlunos.push_back(objetoAluno);
         }
     }
+    else{
+        QMessageBox::critical(this,"ERRO", "Não foi possível abrir o arquivo.");
+    }
+}
+
+void MainWindow::on_btn_disciplina_clicked()
+{
+    QString disciplina=ui->lineEdit->text();
+    ui->textEdit->setText(Filtro::filtrarPorDisciplina(listaAlunos, disciplina));
+}
+
+
+void MainWindow::on_btn_turma_clicked()
+{
+    QString turma=ui->lineEdit->text();
+    ui->textEdit->setText(Filtro::filtrarPorDisciplinaTurma(listaAlunos, turma));
+}
+
+
+void MainWindow::on_btn_curso_clicked()
+{
+    int curso=ui->lineEdit->text().toInt();
+    ui->textEdit->setText(Filtro::filtrarPorCurso(listaAlunos, curso));
+}
+
+
+void MainWindow::on_btn_mostrar_turmas_clicked()
+{
+    QString matricula=ui->lineEdit->text();
+    if(matricula=="Dinossauro"){
+        //Colocar imagem legal
+    }
+    try{
+        ui->textEdit->setText(Filtro::filtrarAluno(listaAlunos, matricula));
+    }
+    catch(QString &erro){
+        QMessageBox::critical(this,"ERRO","Matrícula não listada.");
+    }
+}
+
+void MainWindow::on_btn_abrir_janela_clicked()
+{
+    Janela2 form2;  //classe = Janela2, objeto = form 2
+    QString selectedItem = ui->comboBox->currentText(); //Verifica valor da comboBox
+    QString res;    //QString contendo todos os dados a serem mostrados
+    bool continuarCodigo = false;
+    form2.exec();   //Abre a segunda janela
+    if(selectedItem=="Ordenar por curso"){
+        form2.setLabel("Digite código do curso:");   //Atualiza label da segunda janela
+        //Espera botão ser clicado para executar as proximas linhas
+
+        int curso=form2.getLineEdit().toInt();  //Retorna uma QString contendo o valor, que é convertida para int
+        res=(Filtro::filtrarPorCurso(listaAlunos, curso));  //Armazena valor a ser mostrado
+        form2.close();
+        ui->textEdit->setText(res);
+        return;
+    }
+    if(selectedItem=="Ordenar por disciplina"){
+        form2.setLabel("Digite código da disciplina:");   //Atualiza label da segunda janela
+        QEventLoop loop;  // Cria um objeto QEventLoop
+                QObject::connect(&form2, &Janela2::botaoClicado, &loop, &QEventLoop::quit);  // Conecta o sinal botaoClicado ao slot quit do QEventLoop
+
+                while (true) {
+                    loop.exec();  // Aguarda até que um evento seja processado
+
+                    // Verifica se o botão foi clicado na segunda janela
+                    if (form2.botaoFoiClicado()) {
+                        int curso = form2.getLineEdit().toInt();  // Retorna uma QString contendo o valor, que é convertida para int
+                        res = Filtro::filtrarPorCurso(listaAlunos, curso);  // Armazena valor a ser mostrado
+                        form2.close();
+                        ui->textEdit->setText(res);
+                        return;
+    }
+    if(selectedItem=="Ordenar por turma"){
+        form2.setLabel("Digite código e turma:");   //Atualiza label da segunda janela
+        QString turma=form2.getLineEdit();  //Retorna uma QString contendo o valor
+        res=(Filtro::filtrarPorDisciplinaTurma(listaAlunos, turma));  //Armazena valor a ser mostrado
+        form2.close();
+        ui->textEdit->setText(res);
+        return;
+    }
+    if(selectedItem=="Mostrar turmas de um aluno"){
+        form2.setLabel("Digite a matrícula do aluno:");   //Atualiza label da segunda janela
+        QString matricula=form2.getLineEdit();  //Retorna uma QString contendo o valor
+        res=(Filtro::filtrarAluno(listaAlunos, matricula));  //Armazena valor a ser mostrado
+        form2.close();
+        ui->textEdit->setText(res);
+        return;
+    }
+
 }
 

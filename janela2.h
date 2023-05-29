@@ -1,6 +1,7 @@
 #ifndef JANELA2_H
 #define JANELA2_H
 
+#include <QMessageBox>
 #include <QDialog>
 
 namespace Ui {
@@ -26,7 +27,7 @@ private slots:
 
 private:
     Ui::Janela2 *ui;
-    bool m_botaoClicado;
+    bool m_botaoClicado=false;
 };
 
 #endif // JANELA2_H

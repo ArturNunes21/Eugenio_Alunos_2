@@ -102,17 +102,32 @@ int Aluno::getDisciplinaCursoTamanho(){
 //}
 
 void Aluno::setDisciplinaTurma(QString disciplinas) {
-    QStringList listaDisciplinas = disciplinas.split(' ');
-    for (int i = 0; i < listaDisciplinas.size(); i++) {
+    qDebug() << disciplinas;
+    QStringList listaDisciplinas = disciplinas.split("  ");
+
+    for (auto disciplina=listaDisciplinas.begin(); disciplina!=listaDisciplinas.end(); disciplina++) {
         try {
             DisciplinaTurma* objetoDisciplina = new DisciplinaTurma();
-            objetoDisciplina->setDisciplinaTurma(listaDisciplinas[i]);
+            qDebug() << "Lista disciplinas : " << *disciplina;
+            objetoDisciplina->setDisciplinaTurma(*disciplina);
             disciplinaTurma.push_back(objetoDisciplina);
         } catch (const QString& exception) {
             // Lidar com a exceção
             throw QString("Erro ao adicionar disciplina a lista do objeto Aluno: ") + exception;
         }
     }
+
+//    for (int i = 0; i < listaDisciplinas.size(); i++) {
+//        try {
+//            DisciplinaTurma* objetoDisciplina = new DisciplinaTurma();
+//            qDebug() << "Lista disciplinas[" << i << "]: " << listaDisciplinas[i];
+//            objetoDisciplina->setDisciplinaTurma(listaDisciplinas[i]);
+//            disciplinaTurma.push_back(objetoDisciplina);
+//        } catch (const QString& exception) {
+//            // Lidar com a exceção
+//            throw QString("Erro ao adicionar disciplina a lista do objeto Aluno: ") + exception;
+//        }
+//    }
 }
 
 

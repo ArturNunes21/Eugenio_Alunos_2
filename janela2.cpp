@@ -7,7 +7,7 @@ Janela2::Janela2(QWidget *parent) :
 {
     ui->setupUi(this);
     m_botaoClicado = false;
-    QObject::connect(ui->btn_ordenar, &QPushButton::clicked, this, &Janela2::atualizarEstadoBotao);
+    //QObject::connect(ui->btn_ordenar, &QPushButton::clicked, this, &Janela2::atualizarEstadoBotao);
 
 }
 
@@ -18,6 +18,12 @@ Janela2::~Janela2()
 
 void Janela2::on_btn_ordenar_clicked()
 {
+//    QString valor = ui->lineEdit_janela2->text();
+//    if(valor == "")
+//    {
+//        QMessageBox::critical(this,"ERRO","Digite um valor.");
+//    }
+//    m_botaoClicado=true;
 
 }
 
@@ -34,10 +40,12 @@ bool Janela2::botaoFoiClicado() const
     return m_botaoClicado;
 }
 
-void Janela2::atualizarEstadoBotao()
-{
-    m_botaoClicado = true;
-}
+
+
+//void Janela2::atualizarEstadoBotao()
+//{
+//    m_botaoClicado = true;
+//}
 
 
 

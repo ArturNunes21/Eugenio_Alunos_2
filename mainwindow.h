@@ -1,6 +1,6 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-#include "janela2.h"
+#include "ui_janela2.h"
 #include "aluno.h"
 #include "disciplinaturma.h"
 #include "filtro.h"
@@ -13,6 +13,12 @@
 #include <iterator>
 #include <QDebug>
 #include <QLabel>
+
+#include <QInputDialog>
+
+enum {
+    ORDENAR_POR_CURSO,
+};
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -45,6 +51,8 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+
+    Ui::Janela2 *telaDeFiltro;
 
     std::list<Aluno*>listaAlunos;
 
